@@ -1,0 +1,138 @@
+{
+  "info": {
+    "name": "TaskFlow API",
+    "description": "Görev ve Proje Yönetim Sistemi API'si - Test Koleksiyonu",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" }
+  ],
+  "item": [
+    {
+      "name": "1. Görev Listele (GET /tasks)",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/tasks"
+      }
+    },
+    {
+      "name": "2. Görev Detayı (GET /tasks/:id)",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/tasks/1"
+      }
+    },
+    {
+      "name": "3. Görev Ekle (POST /tasks)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Yeni görev\",\n  \"description\": \"Görev açıklaması buraya yazılır\",\n  \"priority\": \"high\",\n  \"assignee\": \"musa\"\n}"
+        },
+        "url": "{{baseUrl}}/tasks"
+      }
+    },
+    {
+      "name": "4. Görev Güncelle (PUT /tasks/:id)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"completed\"\n}"
+        },
+        "url": "{{baseUrl}}/tasks/1"
+      }
+    },
+    {
+      "name": "5. Görev Sil (DELETE /tasks/:id)",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/tasks/2"
+      }
+    },
+    {
+      "name": "6. Olmayan Görev - 404 Testi (GET /tasks/999)",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/tasks/999"
+      }
+    },
+    {
+      "name": "7. Validasyon Hatası - 400 Testi (POST /tasks - eksik alan)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"\"\n}"
+        },
+        "url": "{{baseUrl}}/tasks"
+      }
+    },
+    {
+      "name": "[Bonus] Duruma Göre Filtrele",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/tasks?status=completed"
+      }
+    },
+    {
+      "name": "[Bonus] Önceliğe Göre Filtrele",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/tasks?priority=high"
+      }
+    },
+    {
+      "name": "[Bonus] Görev Ara",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/tasks/search?keyword=backend"
+      }
+    },
+    {
+      "name": "[Bonus] Çalışana Göre Listele",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/tasks/assignee/musa"
+      }
+    },
+    {
+      "name": "[Bonus] Sayfalama",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/tasks?page=1&limit=2"
+      }
+    },
+    {
+      "name": "[Bonus] Sistem Özeti Raporu",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/reports/summary"
+      }
+    },
+    {
+      "name": "[Bonus] Tamamlanan Görevler Raporu",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/reports/completed"
+      }
+    },
+    {
+      "name": "[Bonus] Bekleyen Görevler Raporu",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/reports/pending"
+      }
+    }
+  ]
+}
